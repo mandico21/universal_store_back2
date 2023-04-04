@@ -22,7 +22,7 @@ class CategoryService:
             name: str | None = None,
             description: str | None = None,
             parent_id: str | None = None
-    ) -> None:
+    ) -> Category:
         if name is not None:
             category.name = name
         if description is not None:
@@ -31,3 +31,4 @@ class CategoryService:
             category.parent_id = parent_id
 
         category.updated_at = datetime.now()
+        return category

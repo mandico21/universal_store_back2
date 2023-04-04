@@ -9,6 +9,16 @@ class Comitter(Protocol):
         raise NotImplementedError
 
 
+class Rollbacker(Protocol):
+
+    def rollback(self):
+        raise NotImplementedError
+
+
+class Transactional(Comitter, Rollbacker, Protocol):
+    pass
+
+
 class CategoryReader(Protocol):
 
     def get_category(self, category_id: CategoryId) -> Category:

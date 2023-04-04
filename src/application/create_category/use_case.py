@@ -12,6 +12,9 @@ class CreateCategory(UseCase[NewCategoryDTO, CategoryDTO]):
 
     def __call__(self, data: NewCategoryDTO) -> CategoryDTO:
         category = self.category_service.create_category(data)
+
+        self.db_gateway.save_category(category)
+        self.db_gateway.commit()
         return CategoryDTO(
             id=category.id,
             name=category.name,
