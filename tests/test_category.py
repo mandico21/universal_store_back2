@@ -2,9 +2,6 @@ import pytest as pytest
 
 from src.domain.category.dto import CategoryCreateDTO
 from src.domain.category.entity import Category
-from src.domain.category.interfaces import ICategoryUoW
-from src.domain.category.use_case import CategoryService
-from src.domain.common.interfaces import IMapper
 
 
 @pytest.fixture
