@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from src.application.create_category.dto import NewCategoryDTO
-from src.domain.models.category import Category
+from src.domain.models.category import Category, CategoryId
 
 
 class CategoryService:
@@ -22,7 +22,7 @@ class CategoryService:
             name: str | None = None,
             description: str | None = None,
             parent_id: str | None = None
-    ) -> Category:
+    ) -> CategoryId:
         if name is not None:
             category.name = name
         if description is not None:
@@ -31,4 +31,4 @@ class CategoryService:
             category.parent_id = parent_id
 
         category.updated_at = datetime.now()
-        return category
+        return category.id

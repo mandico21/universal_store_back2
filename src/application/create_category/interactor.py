@@ -1,4 +1,4 @@
-from src.application.common.use_case import UseCase
+from src.application.common.interactor import UseCase
 from src.application.create_category.dto import NewCategoryDTO, CategoryDTO
 from src.application.create_category.interfaces import DbGateway
 from src.domain.services.category import CategoryService

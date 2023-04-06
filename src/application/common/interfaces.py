@@ -19,7 +19,7 @@ class Transactional(Comitter, Rollbacker, Protocol):
     pass
 
 
-class CategoryReader(Protocol):
+class CategoryGetable(Protocol):
 
     def get_category(self, category_id: CategoryId) -> Category:
         raise NotImplementedError

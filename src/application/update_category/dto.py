@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from datetime import datetime
 
 from src.domain.models.category import CategoryId
 
@@ -7,16 +6,6 @@ from src.domain.models.category import CategoryId
 @dataclass
 class UpdateCategoryDTO:
     id: CategoryId
-    name: str
-    description: str | None
-    parent_id: CategoryId | None
-
-
-@dataclass
-class CategoryDTO:
-    id: CategoryId
-    name: str
-    description: str | None
-    parent_id: CategoryId | None
-    created_at: datetime
-    updated_at: datetime
+    name: str | None = None
+    description: str | None = None
+    parent_id: CategoryId | None = None
