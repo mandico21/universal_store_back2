@@ -1,12 +1,12 @@
 from datetime import datetime
 
-from src.application.create_category.dto import NewCategoryDTO
-from src.domain.models.category import Category, CategoryId
+from src.application.category.create_category.dto import CategoryNewDTO
+from src.domain.models.category import Category
 
 
 class CategoryService:
 
-    def create_category(self, category: NewCategoryDTO) -> Category:
+    def create_category(self, category: CategoryNewDTO) -> Category:
         return Category(
             id=category.id,
             name=category.name,
@@ -22,7 +22,7 @@ class CategoryService:
             name: str | None = None,
             description: str | None = None,
             parent_id: str | None = None
-    ) -> CategoryId:
+    ) -> None:
         if name is not None:
             category.name = name
         if description is not None:
@@ -31,4 +31,4 @@ class CategoryService:
             category.parent_id = parent_id
 
         category.updated_at = datetime.now()
-        return category.id
+        # return category.id

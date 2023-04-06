@@ -3,11 +3,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from src.application.create_category.dto import NewCategoryDTO, CategoryDTO
-from src.application.create_category.interfaces import DbGateway
-from src.application.create_category.interactor import CreateCategory
-from src.application.update_category.dto import UpdateCategoryDTO
-from src.application.update_category.interfactor import UpdateCategory
+from src.application.category.create_category.dto import CategoryDTO
+from src.application.category.create_category import DbGateway
+from src.application.category.update_category.dto import UpdateCategoryDTO
+from src.application.category.update_category.interfactor import UpdateCategory
 from src.domain.models.category import CategoryId, Category
 
 NEW_CATEGORY_ID = CategoryId(10000)

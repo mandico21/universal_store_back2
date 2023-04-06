@@ -1,31 +1,17 @@
 from typing import Protocol
 
-from src.domain.models.category import Category, CategoryId
-
 
 class Comitter(Protocol):
 
-    def commit(self):
+    async def commit(self) -> None:
         raise NotImplementedError
 
 
 class Rollbacker(Protocol):
 
-    def rollback(self):
+    async def rollback(self) -> None:
         raise NotImplementedError
 
 
 class Transactional(Comitter, Rollbacker, Protocol):
     pass
-
-
-class CategoryGetable(Protocol):
-
-    def get_category(self, category_id: CategoryId) -> Category:
-        raise NotImplementedError
-
-
-class CategorySaver(Protocol):
-
-    def save_category(self, category: Category) -> None:
-        raise NotImplementedError

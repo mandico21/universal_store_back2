@@ -4,7 +4,7 @@ from src.domain.models.category import CategoryId
 
 
 @dataclass
-class UpdateCategoryDTO:
+class CategoryUpdateDTO:
     id: CategoryId
     name: str | None = None
     description: str | None = None
