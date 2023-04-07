@@ -18,7 +18,7 @@ async def test_category_update():
         updated_at=old_date,
     )
 
-    CategoryService().update_category(category, name='Женская')
-    assert category.name == 'Женская'
+    CategoryService().update_category(category, name='Женская 2')
+    assert category.name == 'Женская 2'
     assert category.description == None
     assert category.updated_at > old_date
