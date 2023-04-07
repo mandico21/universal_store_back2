@@ -3,13 +3,13 @@ from typing import Protocol
 
 class Comitter(Protocol):
 
-    def commit(self) -> None:
+    async def commit(self) -> None:
         raise NotImplementedError
 
 
 class Rollbacker(Protocol):
 
-    def rollback(self) -> None:
+    async def rollback(self) -> None:
         raise NotImplementedError
 
 

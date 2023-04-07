@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
-from unittest.mock import Mock
+from unittest.mock import Mock, AsyncMock
 
 import pytest
 
 from src.application.category.interfaces import CategoryGateway
 from src.application.category.update_category.dto import CategoryUpdateDTO
-from src.application.category.update_category.interfactor import UpdateCategory
+from src.application.category.update_category.interactor import UpdateCategory
 from src.domain.models.category import CategoryId, Category
 from src.domain.services.category import CategoryService
 
@@ -14,14 +14,18 @@ DATA = CategoryUpdateDTO(
     id=NEW_CATEGORY_ID,
     name='Женская',
 )
+DATA_ERROR = CategoryUpdateDTO(
+    id=CategoryId(1002),
+    name='Женская',
+)
 
 
 @pytest.fixture()
 def db_gateway() -> CategoryGateway:
-    gateway = Mock()
-    gateway.commit = Mock()
-    gateway.rollback = Mock()
-    gateway.find_by_id = Mock(return_value=Category(
+    gateway = AsyncMock()
+    gateway.commit = AsyncMock()
+    gateway.rollback = AsyncMock()
+    gateway.find_by_id = AsyncMock(return_value=Category(
         id=NEW_CATEGORY_ID,
         name='Мужская',
         description='Одежда для мужчин',
@@ -29,15 +33,16 @@ def db_gateway() -> CategoryGateway:
         created_at=datetime(2000, 12, 31),
         updated_at=datetime(2000, 12, 31),
     ))
-    gateway.add_category = Mock(return_value=CategoryId)
-    gateway.update_category = Mock()
+    gateway.add_category = AsyncMock(return_value=CategoryId)
+    gateway.update_category = AsyncMock()
     return gateway
 
 
-def test_update_category(db_gateway):
+@pytest.mark.asyncio
+async def test_update_category_access(db_gateway):
     old_date = datetime.now() - timedelta(days=1)
-    UpdateCategory(db_gateway=db_gateway, category_service=CategoryService())(DATA)
-    category = db_gateway.find_by_id(NEW_CATEGORY_ID)
+    await UpdateCategory(db_gateway=db_gateway, category_service=CategoryService())(DATA)
+    category = await db_gateway.find_by_id(NEW_CATEGORY_ID)
 
     assert category.name == 'Женская'
     assert category.description == 'Одежда для мужчин'

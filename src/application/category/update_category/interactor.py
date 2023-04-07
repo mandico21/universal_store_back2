@@ -16,8 +16,8 @@ class UpdateCategory(Interactor[CategoryUpdateDTO, None]):
         self.db_gateway = db_gateway
         self.category_service = category_service
 
-    def __call__(self, data: CategoryUpdateDTO) -> None:
-        category = self.db_gateway.find_by_id(data.id)
+    async def __call__(self, data: CategoryUpdateDTO) -> None:
+        category = await self.db_gateway.find_by_id(data.id)
         if not category:
             raise CategoryNotFoundError
 
@@ -28,8 +28,8 @@ class UpdateCategory(Interactor[CategoryUpdateDTO, None]):
             parent_id=data.parent_id
         )
         try:
-            self.db_gateway.update_category(category)
-            self.db_gateway.commit()
+            await self.db_gateway.update_category(category)
+            await self.db_gateway.commit()
         except IntegrityViolationError:
-            self.db_gateway.rollback()
+            await self.db_gateway.rollback()
             raise CategoryAlreadyExistsError

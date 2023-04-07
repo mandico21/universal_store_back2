@@ -17,9 +17,9 @@ class CreateCategory(Interactor[CategoryNewDTO, CategoryId]):
     async def __call__(self, data: CategoryNewDTO) -> CategoryId:
         category = self.category_service.create_category(data)
         try:
-            category = await self.db_gateway.add_category(category)
+            await self.db_gateway.add_category(category)
             await self.db_gateway.commit()
         except IntegrityViolationError:
             await self.db_gateway.rollback()
             raise CategoryAlreadyExistsError
-        return category
+        return category.id

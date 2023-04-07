@@ -1,16 +1,26 @@
-from typing import Protocol
+from typing import Protocol, List
 
 from src.application.common.interfaces import Transactional
 from src.domain.models.category import CategoryId, Category
 
 
-class CategoryGateway(Transactional, Protocol):
+class CategoryCommand(Protocol):
 
-    def add_category(self, category: Category) -> CategoryId:
+    async def add_category(self, category: Category) -> CategoryId:
         raise NotImplementedError
 
-    def find_by_id(self, category_id: CategoryId) -> Category:
+    async def update_category(self, category: Category) -> None:
         raise NotImplementedError
 
-    def update_category(self, category: Category) -> None:
+
+class CategoryQuery(Protocol):
+
+    async def find_all(self) -> List[Category]:
         raise NotImplementedError
+
+    async def find_by_id(self, category_id: CategoryId) -> Category:
+        raise NotImplementedError
+
+
+class CategoryGateway(Transactional, CategoryCommand, CategoryQuery, Protocol):
+    pass
