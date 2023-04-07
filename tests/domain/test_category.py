@@ -1,10 +1,13 @@
 from datetime import datetime, timedelta
 
+import pytest
+
 from src.domain.models.category import Category, CategoryId
 from src.domain.services.category import CategoryService
 
 
-def test_category_update():
+@pytest.mark.asyncio
+async def test_category_update():
     old_date = datetime.now() - timedelta(days=1)
     category = Category(
         id=CategoryId(1),

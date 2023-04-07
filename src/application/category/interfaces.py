@@ -6,11 +6,11 @@ from src.domain.models.category import CategoryId, Category
 
 class CategoryGateway(Transactional, Protocol):
 
-    async def add_category(self, category: Category) -> CategoryId:
+    def add_category(self, category: Category) -> CategoryId:
         raise NotImplementedError
 
-    async def find_by_id(self, category_id: CategoryId) -> Category:
+    def find_by_id(self, category_id: CategoryId) -> Category:
         raise NotImplementedError
 
-    async def update_category(self, category: Category) -> None:
+    def update_category(self, category: Category) -> None:
         raise NotImplementedError
