@@ -9,3 +9,11 @@ class CategoryUpdateDTO:
     name: str | None = None
     description: str | None = None
     parent_id: CategoryId | None = None
+
+
+@dataclass
+class CategoryNewDTO:
+    id: CategoryId
+    name: str
+    description: str | None
+    parent_id: CategoryId | None

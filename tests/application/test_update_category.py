@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
-from unittest.mock import Mock, AsyncMock
+from unittest.mock import AsyncMock
 
 import pytest
 
 from src.application.category.interfaces import CategoryGateway
-from src.application.category.update_category.dto import CategoryUpdateDTO
-from src.application.category.update_category.interactor import UpdateCategory
+from src.application.category.dto import CategoryUpdateDTO
+from src.application.category.interactor.update_category import UpdateCategory
 from src.domain.models.category import CategoryId, Category
 from src.domain.services.category import CategoryService
 

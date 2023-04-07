@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.application.category.create_category.dto import CategoryNewDTO
+from src.application.category.dto import CategoryNewDTO
 from src.domain.models.category import Category
 
 

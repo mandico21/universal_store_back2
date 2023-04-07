@@ -3,8 +3,8 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from src.application.category.create_category.dto import CategoryNewDTO
-from src.application.category.create_category.interactor import CreateCategory
+from src.application.category.dto import CategoryNewDTO
+from src.application.category.interactor.create_category import CreateCategory
 from src.application.category.interfaces import CategoryGateway
 from src.domain.models.category import CategoryId, Category
 from src.domain.services.category import CategoryService
@@ -36,6 +36,7 @@ def db_gateway() -> CategoryGateway:
     gateway.add_category = AsyncMock(return_value=CategoryId)
     gateway.update_category = AsyncMock()
     return gateway
+
 
 @pytest.mark.asyncio
 async def test_create_wish_access(db_gateway):
